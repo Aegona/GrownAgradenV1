@@ -379,6 +379,7 @@ local old_position = {}
 
 function Sell()
 if _G.Farm1 == true then
+_G.Farm1 = false
 old_position = nil
 wait(0.3)
     old_position = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
@@ -388,11 +389,13 @@ wait(0.3)
 	game:GetService("ReplicatedStorage").GameEvents.Sell_Inventory:FireServer()
 	wait(1)
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = old_position
-
+wait(2)
+_G.Farm1 = true
 end
 end
 
 while _G.AutoSell do wait()
+wait(2)
 	Sell()
 	wait(60)
 end
