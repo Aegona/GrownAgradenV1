@@ -6,7 +6,7 @@ _G.AutoHarvest = false
 _G.HoneyFarm = false
 _G.NoClip = false
 _G.SelectFruit = "All"
-_G.AutoSell = true
+
 _G.AutoBuy = {
 	-- 🌱 seeds
     ["Pepper"] = false,
@@ -74,6 +74,11 @@ dropdown:Add("Mango")
 
 features:AddLabel("🍯 - Event Farm -")
 features:AddSwitch("🐝 Honey Farm | ฟาร์มน้ำผึ้ง", function(bool) _G.HoneyFarm = bool end)
+
+features:AddSwitch("💰 Auto Sell | ขายอัตโนมัติ", function(bool)
+    _G.AutoSell = bool
+end)
+
 
 features:AddLabel("📍 - Teleport -")
 features:AddButton("📦 Teleport to Event | วาร์ปไปที่ อีเว้น", function()
@@ -379,6 +384,7 @@ local old_position = {}
 
 function Sell()
 if _G.Farm1 == true then
+switch:Set(false)
 _G.Farm1 = false
 old_position = nil
 wait(0.3)
@@ -390,6 +396,7 @@ wait(0.3)
 	wait(1)
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = old_position
 wait(2)
+switch:Set(true)
 _G.Farm1 = true
 end
 end
