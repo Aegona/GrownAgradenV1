@@ -6,7 +6,7 @@ _G.AutoHarvest = false
 _G.HoneyFarm = false
 _G.NoClip = false
 _G.SelectFruit = "All"
-
+_G.AutoSell = true
 _G.AutoBuy = {
 	-- 🌱 seeds
     ["Pepper"] = false,
@@ -374,3 +374,26 @@ spawn(function()
 		wait(2)
 	end
 end)
+
+local old_position = {}
+
+function Sell()
+if _G.Farm1 == true then
+old_position = nil
+wait(0.3)
+    old_position = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+	 wait(0.3)
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(86.5889816, 2.99999976, 0.426792115, -0.00217938982, -1.02682918e-07, -0.999997616, 5.50546414e-12, 1, -1.02683174e-07, 0.999997616, -2.29292113e-10, -0.00217938982)
+	wait(1)
+	game:GetService("ReplicatedStorage").GameEvents.Sell_Inventory:FireServer()
+	wait(1)
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = old_position
+
+end
+end
+
+while _G.AutoSell do wait()
+	Sell()
+	wait(60)
+end
+
